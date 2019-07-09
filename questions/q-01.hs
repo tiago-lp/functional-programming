@@ -46,8 +46,8 @@ interpolationSearch arr x lo hi
 -- depois digitar 'main' e apertar enter para rodar o exemplo abaixo
 main = do
     let arr = [20, 22, 23, 26, 28, 29, 30, 31, 32, 33, 34, 43, 45, 52, 57]
+    let x = 28
     let lo = 0
     let hi = (length arr) - 1
-    let x = 28
     let result = interpolationSearch arr x lo hi
-    print result
+    print ("Index of x: " ++ (show result))
