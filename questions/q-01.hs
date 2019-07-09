@@ -26,3 +26,28 @@ Step4: Repeat until a match is found or the sub-array reduces to zero.
 
 -- Solution --
 
+getPos arr x lo hi = lo + (((hi - lo) `div` ((arr !! hi) - (arr !! lo))) * (x - (arr !! lo)))
+
+continue arr x lo hi | lo <= hi && x >= (arr !! lo) && x <= (arr !! hi) = True
+                     | otherwise = False
+
+decideIsLo arr x lo | (arr !! lo) == x = lo
+                    | otherwise = -1
+
+interpolationSearch arr x lo hi
+    | (continue arr x lo hi) && (lo == hi) = decideIsLo arr x lo
+    | (continue arr x lo hi) && ((arr !! (getPos arr x lo hi)) == x ) = getPos arr x lo hi
+    | (continue arr x lo hi) && ((arr !! (getPos arr x lo hi)) < x ) = interpolationSearch arr x ((getPos arr x lo hi) + 1) hi
+    | (continue arr x lo hi) && ((arr !! (getPos arr x lo hi)) > x ) = interpolationSearch arr x ((getPos arr x lo hi) - 1) hi
+    | otherwise = -1
+
+-- Exemplo
+-- no terminal> ghci q-01.hs
+-- depois digitar 'main' e apertar enter para rodar o exemplo abaixo
+main = do
+    let arr = [20, 22, 23, 26, 28, 29, 30, 31, 32, 33, 34, 43, 45, 52, 57]
+    let lo = 0
+    let hi = (length arr) - 1
+    let x = 28
+    let result = interpolationSearch arr x lo hi
+    print result
