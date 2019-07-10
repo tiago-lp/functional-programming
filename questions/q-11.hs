@@ -34,6 +34,7 @@ getAlunosByCra alunos crax = (crax, (filter (\x -> (cra x) == crax) alunos))
 
 groupByCraAux [] _ _ = []
 groupByCraAux (x:xs) alunos result = result ++ [getAlunosByCra alunos x] ++ groupByCraAux xs alunos result
+
 groupByCra alunos = groupByCraAux (unique (getCRAs alunos [])) alunos []
 
 -- Exemplo

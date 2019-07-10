@@ -14,3 +14,20 @@ Given array has six inversions (8,4), (4,2),
 -}
 
 -- Solution --
+
+inv :: Ord a => [a] -> [(a, a)]
+inv [] = []
+inv xs = [(a, b) | b <- xs', a > b] ++ inv xs'
+    where xs' = tail xs
+          a = head xs
+
+countInversions :: [Int] -> Int
+countInversions arr = length (inv arr)
+
+-- Exemplo
+-- no terminal> ghci q-09.hs
+-- depois digitar 'main' e apertar enter para rodar o exemplo abaixo
+main = do
+    let arr = [8,4,2,1]
+    print "Input: arr[] = {8, 4, 2, 1}"
+    print (show (countInversions arr))
